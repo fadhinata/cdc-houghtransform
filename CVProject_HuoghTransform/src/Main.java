@@ -10,6 +10,8 @@ public class Main {
 		String filename = "./Polygons and straight lines.jpg";
 		GreyImage image = PGMTools.importImage(filename);
 		
+		System.out.println("");
+		
 		PGMTools.exportGreyImage("/home/swordfish/ASAH.pgm", ImageEffects.applyKernelToImage(image, ImageEffects.SOBEL_HORIZONTAL));
 		PGMTools.exportGreyImage("/home/swordfish/ASAV.pgm", ImageEffects.applyKernelToImage(image, ImageEffects.SOBEL_VERTICAL));
 		
