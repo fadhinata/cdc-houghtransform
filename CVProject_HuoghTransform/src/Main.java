@@ -15,8 +15,6 @@ public class Main {
 		
 		PGMTools.exportGreyImage("/home/swordfish/ASASDASDASDASDASDASDAS.pgm", ImageEffects.binarySobel(image, 0)[0]);
 		
-		System.out.println("Prova1");
-		
 //		PGMTools.exportGreyImage("/home/swordfish/sdasdasdasdasdasdasd.pgm", new GreyImage(intPixels, imageMat.cols(), imageMat.rows()));
 //		
 //		int height = edgesModule.getHeight();
