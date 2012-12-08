@@ -7,7 +7,7 @@ import com.googlecode.javacv.cpp.opencv_core.*;
 
 public class Main {
 	public static void main(String[] args) {
-		String filename = "/home/swordfish/Programming/Workspaces/ComputerVision-Workspace/CVProject_HuoghTransform/Polygons and straight lines.jpg";
+		String filename = "./Polygons and straight lines.jpg";
 		GreyImage image = PGMTools.importImage(filename);
 		
 		PGMTools.exportGreyImage("/home/swordfish/ASAH.pgm", ImageEffects.applyKernelToImage(image, ImageEffects.SOBEL_HORIZONTAL));

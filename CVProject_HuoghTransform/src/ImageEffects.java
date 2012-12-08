@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.Random;
 
 
 public class ImageEffects {
@@ -216,8 +215,8 @@ public class ImageEffects {
 	 */
 	
 	public static GreyImage[] binarySobel(GreyImage image, float threshold){
-		GreyImage imageVertical = applyKernelToImage(image, SOBEL_HORIZONTAL);
-		GreyImage imageHorizontal = applyKernelToImage(image, SOBEL_VERTICAL);
+		GreyImage imageVertical = applyKernelToImageNoBounds(image, SOBEL_HORIZONTAL);
+		GreyImage imageHorizontal = applyKernelToImageNoBounds(image, SOBEL_VERTICAL);
 		
 		GreyImage moduleImage = imageVertical.imageCopy();
 		GreyImage phaseImage = imageVertical.imageCopy();
@@ -236,14 +235,14 @@ public class ImageEffects {
 	
 	
 	/**
-	 * Make the convolution of the given kernel and given image.
+	 * Apply the convolution of the given filter to the given image. Without checking boudaries.
 	 * 
-	 * @param image - original image
+	 * @param image
 	 * @param kernel
-	 * @return a GreyImage: the convolution
+	 * @return
 	 */
 	
-	public static GreyImage applyKernelToImage(GreyImage image, double[] kernel){
+	private static GreyImage applyKernelToImageNoBounds(GreyImage image, double[] kernel){
 		int N = (int) Math.sqrt(kernel.length);
 		int width = image.getWidth() - N/2 - N/2;
 		int height = image.getHeight() - N/2 - N/2;
@@ -267,6 +266,27 @@ public class ImageEffects {
 		}
 		
 		return newImage;
+	}
+	
+	/**
+	 * Make the convolution of the given kernel and given image.
+	 * 
+	 * @param image - original image
+	 * @param kernel
+	 * @return a GreyImage: the convolution
+	 */
+	
+	public static GreyImage applyKernelToImage(GreyImage image, double[] kernel){
+		GreyImage temp = applyKernelToImageNoBounds(image, kernel);
+		
+		int[] pixels = temp.getPixels();
+		
+		for (int i = 0; i < pixels.length; i++) {
+			pixels[i] = Math.abs(pixels[i]);
+			if(pixels[i] > 255) pixels[i] = 255;
+		}
+		
+		return temp;
 	}
 	
 	
